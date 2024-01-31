@@ -9,6 +9,7 @@ import 'infrastructure/navigation/routes.dart';
 import 'infrastructure/sources/constants/constants.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   var initialRoute = await Routes.initialRoute;
   runApp(Main(initialRoute));
