@@ -13,7 +13,12 @@ class FormScreen extends GetView<FormController> {
       init: controller,
       initState: (_) {},
       builder: (_) {
-        return const ScaffoldView();
+        return ScaffoldView(
+          topBar: TopBar(
+            title: "Input personal data",
+            onBackTap: () {},
+          ),
+        );
       },
     );
   }
