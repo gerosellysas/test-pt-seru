@@ -1,19 +1,21 @@
 name: test_pt_seru
 version: 1.0.0+1
 publish_to: none
-description: Application for recruitment process held by PT. Solusi Eksplorasi Rembulan Utama.
-environment: 
+description: Application for recruitment process held by PT. Solusi Eksplorasi
+  Rembulan Utama.
+environment:
   sdk: '>=3.2.3 <4.0.0'
 
-dependencies: 
+dependencies:
+  connectivity_plus: ^5.0.2
   cupertino_icons: ^1.0.2
-  get: 4.6.6
-  flutter: 
+  flutter:
     sdk: flutter
+  get: 4.6.6
 
-dev_dependencies: 
+dev_dependencies:
   flutter_lints: ^2.0.0
-  flutter_test: 
+  flutter_test:
     sdk: flutter
 
 flutter:
