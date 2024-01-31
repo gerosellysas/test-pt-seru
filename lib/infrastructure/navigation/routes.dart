@@ -5,4 +5,5 @@ class Routes {
 
   static const splash = '/';
   static const welcome = '/welcome';
+  static const form = '/form';
 }

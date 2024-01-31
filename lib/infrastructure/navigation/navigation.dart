@@ -42,5 +42,13 @@ class Nav {
       transitionDuration: const Duration(milliseconds: 600),
       curve: Curves.linear,
     ),
+    GetPage(
+      name: Routes.form,
+      page: () => const FormScreen(),
+      binding: FormControllerBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 600),
+      curve: Curves.linear,
+    ),
   ];
 }
