@@ -90,7 +90,7 @@ class _CameraFront extends StatelessWidget {
           height: 520.h,
           width: 1.sw,
           child: AspectRatio(
-            aspectRatio: controller!.value.aspectRatio,
+            aspectRatio: 1 / controller!.value.aspectRatio,
             child: CameraPreview(
               controller!,
             ),
@@ -124,7 +124,7 @@ class _CameraBack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: controller!.value.aspectRatio,
+      aspectRatio: 1 / controller!.value.aspectRatio,
       child: CameraPreview(
         controller!,
         child: Column(

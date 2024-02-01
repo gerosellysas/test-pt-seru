@@ -24,17 +24,17 @@ class PhotoScreen extends GetView<PhotoController> {
             children: [
               Obx(() => PhotoCard(
                     title: "ID card",
-                    onTap: () => c.requestCameraPermission(0, 0),
+                    onTap: () => c.onPhotoCardTapped(camMode: 0, fileIndex: 0),
                     file: c.app.cameraFiles[0].value,
                   )),
               Obx(() => PhotoCard(
                     title: "Selfie photo",
-                    onTap: () => c.requestCameraPermission(1, 1),
+                    onTap: () => c.onPhotoCardTapped(camMode: 1, fileIndex: 1),
                     file: c.app.cameraFiles[1].value,
                   )),
               Obx(() => PhotoCard(
                     title: "Freestyle photo",
-                    onTap: () => c.requestCameraPermission(0, 2),
+                    onTap: () => c.onPhotoCardTapped(camMode: 0, fileIndex: 2),
                     file: c.app.cameraFiles[2].value,
                   )),
               const Expanded(child: SizedBox()),
