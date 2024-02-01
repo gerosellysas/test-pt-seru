@@ -34,6 +34,8 @@ class Main extends StatelessWidget {
             colorSchemeSeed: Hues.primary,
             fontFamily: "Inter",
             useMaterial3: true,
+            highlightColor: Hues.grey.withOpacity(0.24),
+            splashColor: Hues.grey.withOpacity(0.24),
           ),
         ),
       ),
