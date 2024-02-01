@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:camera/camera.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class AppService extends GetxService with WidgetsBindingObserver {
   var connectivity = ConnectivityResult.none.obs;
   var personal = ["".obs, "".obs, "".obs];
   var region = ["".obs, "".obs, "".obs, "".obs];
+  var cameraFiles = [XFile("").obs, XFile("").obs, XFile("").obs];
   var cardId = "".obs;
   var bottomHeight = 0.0.obs;
 

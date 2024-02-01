@@ -22,18 +22,21 @@ class PhotoScreen extends GetView<PhotoController> {
           ),
           view: Column(
             children: [
-              PhotoCard(
-                title: "ID card",
-                onTap: () => c.requestCameraPermission(0),
-              ),
-              PhotoCard(
-                title: "Selfie photo",
-                onTap: () => c.requestCameraPermission(1),
-              ),
-              PhotoCard(
-                title: "Freestyle photo",
-                onTap: () => c.requestCameraPermission(0),
-              ),
+              Obx(() => PhotoCard(
+                    title: "ID card",
+                    onTap: () => c.requestCameraPermission(0, 0),
+                    file: c.app.cameraFiles[0].value,
+                  )),
+              Obx(() => PhotoCard(
+                    title: "Selfie photo",
+                    onTap: () => c.requestCameraPermission(1, 1),
+                    file: c.app.cameraFiles[1].value,
+                  )),
+              Obx(() => PhotoCard(
+                    title: "Freestyle photo",
+                    onTap: () => c.requestCameraPermission(0, 2),
+                    file: c.app.cameraFiles[2].value,
+                  )),
               const Expanded(child: SizedBox()),
               PhotoNavigation(
                 onBackTap: () => c.onBackTapped(),

@@ -1,14 +1,19 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test_pt_seru/infrastructure/sources/constants/constants.dart';
 
 class PhotoCard extends StatelessWidget {
   final String? title;
+  final XFile? file;
   final void Function()? onTap;
 
   const PhotoCard({
     super.key,
     this.title,
+    this.file,
     this.onTap,
   });
 
@@ -47,6 +52,11 @@ class PhotoCard extends StatelessWidget {
                   color: Hues.grey.withOpacity(0.24),
                   borderRadius: BorderRadius.circular(8.w),
                 ),
+                child: file == null || file!.path == ""
+                    ? const SizedBox()
+                    : Image.file(
+                        File(file!.path),
+                      ),
               ),
             ],
           ),
