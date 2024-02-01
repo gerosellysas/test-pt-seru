@@ -19,8 +19,9 @@ class AppService extends GetxService with WidgetsBindingObserver {
   var personal = ["".obs, "".obs, "".obs];
   var region = ["".obs, "".obs, "".obs, "".obs];
   var cameraFiles = [XFile("").obs, XFile("").obs, XFile("").obs];
-  var cameraBase64 = ["".obs, "".obs];
+  var cameraBase64 = ["".obs, "".obs, "".obs];
   var cardId = "".obs;
+  Map<String, dynamic> result = {};
   var bottomHeight = 0.0.obs;
 
   @override

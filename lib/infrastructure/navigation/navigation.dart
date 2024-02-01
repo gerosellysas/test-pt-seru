@@ -66,5 +66,13 @@ class Nav {
       transitionDuration: const Duration(milliseconds: 450),
       curve: Curves.linear,
     ),
+    GetPage(
+      name: Routes.result,
+      page: () => const ResultScreen(),
+      binding: ResultControllerBinding(),
+      transition: Transition.circularReveal,
+      transitionDuration: const Duration(milliseconds: 300),
+      curve: Curves.linear,
+    ),
   ];
 }
