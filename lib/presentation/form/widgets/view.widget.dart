@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FormView extends StatelessWidget {
-  final ScrollController? controller;
   final Widget? nameField;
   final Widget? regionField;
   final Widget? biodataField;
+  final Widget? navigation;
   final double? bottomHeight;
 
   const FormView({
     super.key,
-    this.controller,
     this.nameField,
     this.regionField,
     this.biodataField,
+    this.navigation,
     this.bottomHeight,
   });
 
@@ -23,15 +23,12 @@ class FormView extends StatelessWidget {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            controller: controller!,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: SizedBox(
-              height: 1.sh -
-                  (kToolbarHeight + ScreenUtil().statusBarHeight) +
-                  bottomHeight!,
+              height: (1.sh + bottomHeight!) -
+                  (kToolbarHeight + ScreenUtil().statusBarHeight),
               width: 1.sw,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 8.h),
                   nameField!,
@@ -39,7 +36,9 @@ class FormView extends StatelessWidget {
                   biodataField!,
                   SizedBox(height: 16.h),
                   regionField!,
-                  SizedBox(height: 48.h),
+                  const Expanded(child: SizedBox()),
+                  navigation!,
+                  SizedBox(height: bottomHeight! + 48.h),
                 ],
               ),
             ),

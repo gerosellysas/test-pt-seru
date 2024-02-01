@@ -20,7 +20,6 @@ class FormScreen extends GetView<FormController> {
             onBackTap: () {},
           ),
           view: Obx(() => FormView(
-                controller: c.scrollController,
                 nameField: FormNameField(
                   controllers: [c.fieldControllers[0], c.fieldControllers[1]],
                   focuses: [c.fieldFocuses[0], c.fieldFocuses[1]],
@@ -29,12 +28,8 @@ class FormScreen extends GetView<FormController> {
                 ),
                 regionField: FormRegionField(
                   searchFocuses: c.dropdownSearchFocuses,
+                  onTap: (i) => (),
                   onChange: (i, str) => (),
-                  onSearchTap: (i) => c.scrollController.animateTo(
-                    60,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.linear,
-                  ),
                 ),
                 biodataField: FormBiodataField(
                   controller: c.fieldControllers[2],
@@ -42,6 +37,7 @@ class FormScreen extends GetView<FormController> {
                   onChange: (str) => (),
                   onSubmit: (str) => c.onFieldSubmitted(2, str),
                 ),
+                navigation: const FormNavigation(),
                 bottomHeight: c.bottomHeight.value,
               )),
         );

@@ -11,8 +11,8 @@ class DropdownField extends StatelessWidget {
   final String? labelText;
   final bool? error;
   final FocusNode? searchFoscus;
+  final void Function()? onTap;
   final void Function(String?)? onChange;
-  final void Function()? onSearchTap;
 
   const DropdownField({
     super.key,
@@ -20,8 +20,8 @@ class DropdownField extends StatelessWidget {
     this.labelText,
     this.error,
     this.searchFoscus,
+    this.onTap,
     this.onChange,
-    this.onSearchTap,
   });
 
   @override
@@ -84,7 +84,6 @@ class DropdownField extends StatelessWidget {
           enableInteractiveSelection: false,
           textInputAction: TextInputAction.search,
           style: Fonts.normal(),
-          onTap: onSearchTap,
           decoration: InputDecoration(
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(

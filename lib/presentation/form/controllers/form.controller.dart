@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 class FormController extends GetxController with WidgetsBindingObserver {
   final _view = WidgetsBinding.instance.platformDispatcher.views.first;
 
-  late ScrollController scrollController;
-
   var fieldControllers = <TextEditingController>[];
   var fieldFocuses = <FocusNode>[];
   var dropdownSearchFocuses = <FocusNode>[];
@@ -15,7 +13,6 @@ class FormController extends GetxController with WidgetsBindingObserver {
 
   @override
   void onInit() {
-    scrollController = ScrollController();
     for (var i = 0; i < 4; i++) {
       if (i < 3) {
         fieldControllers.add(TextEditingController());
@@ -35,7 +32,6 @@ class FormController extends GetxController with WidgetsBindingObserver {
 
   @override
   void onClose() {
-    scrollController.dispose();
     for (var controller in fieldControllers) {
       controller.dispose();
     }
