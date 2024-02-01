@@ -4,7 +4,7 @@ import 'package:test_pt_seru/feature/camera/camera.dart';
 import 'package:test_pt_seru/feature/camera/domain/usecases/camera.dispose.usecase.dart';
 import 'package:test_pt_seru/feature/camera/domain/usecases/camera.initialize.usecase.dart';
 
-class CameraService extends GetxService {
+class CameraHelper extends GetxService {
   final CameraInitializeUseCase _cameraInitialize = CameraInitializeUseCase();
   final CameraTakePictureUseCase _cameraTakePicture =
       CameraTakePictureUseCase();
