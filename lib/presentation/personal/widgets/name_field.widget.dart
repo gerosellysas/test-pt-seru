@@ -5,12 +5,16 @@ import 'package:test_pt_seru/presentation/components/widgets/widgets.components.
 
 class PersonalNameField extends StatelessWidget {
   final List<TextEditingController>? controllers;
+  final List<bool>? errors;
+  final List<String>? errorsText;
   final void Function(int, String)? onChange;
   final void Function(int, String)? onSubmit;
 
   const PersonalNameField({
     super.key,
     this.controllers,
+    this.errors,
+    this.errorsText,
     this.onChange,
     this.onSubmit,
   }) : assert(
@@ -25,6 +29,8 @@ class PersonalNameField extends StatelessWidget {
         (i) => InputField(
           w: 164.w,
           controller: controllers![i],
+          error: errors![i],
+          errorText: errorsText![i],
           capitalization: TextCapitalization.words,
           labelText: _labels[i],
           formatter: [
@@ -51,7 +57,7 @@ class PersonalNameField extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: _fields,
           ),
-          SizedBox(height: 16.h),
+          SizedBox(height: 32.h),
         ],
       ),
     );

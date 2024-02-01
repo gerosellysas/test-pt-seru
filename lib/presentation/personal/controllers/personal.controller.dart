@@ -39,7 +39,6 @@ class PersonalController extends GetxController with WidgetsBindingObserver {
   void onFieldChanged(int i, String str) {
     fieldErrors[i].value = false;
     fieldErrorsText[i].value = "";
-    print("====== $fieldErrors");
     app.personal[i].value = str;
   }
 

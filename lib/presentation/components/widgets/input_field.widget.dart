@@ -6,7 +6,6 @@ import 'package:test_pt_seru/infrastructure/sources/constants/constants.dart';
 class InputField extends StatelessWidget {
   final double? w;
   final TextEditingController? controller;
-  final FocusNode? focusNode;
   final TextCapitalization? capitalization;
   final TextInputAction? inputAction;
   final int? maxLength;
@@ -16,7 +15,6 @@ class InputField extends StatelessWidget {
   final String? hintText;
   final String? errorText;
   final bool? error;
-  final bool? showCounter;
   final void Function(String)? onChange;
   final void Function(String)? onSubmit;
 
@@ -24,7 +22,6 @@ class InputField extends StatelessWidget {
     super.key,
     this.w,
     this.controller,
-    this.focusNode,
     this.capitalization,
     this.inputAction,
     this.maxLength,
@@ -34,55 +31,81 @@ class InputField extends StatelessWidget {
     this.hintText,
     this.errorText,
     this.error,
-    this.showCounter = false,
     this.onChange,
     this.onSubmit,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      height: maxLines != null ? 150.h : 72.h,
       width: w ?? 352.w,
-      alignment: Alignment.center,
-      child: TextField(
-        controller: controller,
-        focusNode: focusNode,
-        cursorWidth: 1.75,
-        keyboardType: TextInputType.text,
-        magnifierConfiguration: TextMagnifierConfiguration.disabled,
-        maxLength: maxLength,
-        maxLines: maxLines ?? 1,
-        style: Fonts.normal(),
-        textAlign: TextAlign.start,
-        textCapitalization: capitalization ?? TextCapitalization.none,
-        textInputAction: inputAction ?? TextInputAction.next,
-        inputFormatters: formatter,
-        onChanged: onChange,
-        onSubmitted: onSubmit,
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: error == true ? Hues.red : Hues.grey,
+      child: Stack(
+        children: [
+          Container(
+            width: w ?? 352.w,
+            alignment: Alignment.topCenter,
+            child: TextField(
+              controller: controller,
+              cursorWidth: 1.75,
+              keyboardType: TextInputType.text,
+              magnifierConfiguration: TextMagnifierConfiguration.disabled,
+              maxLength: maxLength,
+              maxLines: maxLines ?? 1,
+              style: Fonts.normal(),
+              textAlign: TextAlign.start,
+              textCapitalization: capitalization ?? TextCapitalization.none,
+              textInputAction: inputAction ?? TextInputAction.next,
+              inputFormatters: formatter,
+              onChanged: onChange,
+              onSubmitted: onSubmit,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: error == true ? Hues.red : Hues.grey,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: error == true ? Hues.red : Hues.primary,
+                    width: 1.5,
+                  ),
+                ),
+                isDense: true,
+                alignLabelWithHint: true,
+                counterStyle: Fonts.normal(
+                  color: Hues.black.withOpacity(0.36),
+                  size: 12.sp,
+                ),
+                labelText: labelText,
+                labelStyle: Fonts.italic(color: Hues.grey),
+                hintText: hintText,
+                hintStyle: Fonts.italic(color: Hues.grey),
+                floatingLabelStyle: Fonts.italic(
+                  color: error == true ? Hues.red : Hues.blue,
+                ),
+              ),
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: error == true ? Hues.red : Hues.blue,
-              width: 1.5,
+          Visibility(
+            visible: error!,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  SizedBox(width: 4.w),
+                  Text(
+                    errorText!,
+                    style: Fonts.italic(
+                      color: Hues.red,
+                      size: 12.sp,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          isDense: true,
-          alignLabelWithHint: true,
-          counterStyle: Fonts.normal(
-            color: Hues.black.withOpacity(0.36),
-            size: 12.sp,
-          ),
-          labelText: labelText,
-          labelStyle: Fonts.italic(color: Hues.grey),
-          hintText: hintText,
-          hintStyle: Fonts.italic(color: Hues.grey),
-          floatingLabelStyle: Fonts.italic(color: Hues.blue),
-        ),
+        ],
       ),
     );
   }

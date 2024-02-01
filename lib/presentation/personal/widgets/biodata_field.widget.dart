@@ -5,12 +5,16 @@ import 'package:test_pt_seru/presentation/components/widgets/widgets.components.
 
 class PersonalBiodataField extends StatelessWidget {
   final TextEditingController? controller;
+  final bool? error;
+  final String? errorText;
   final void Function(String)? onChange;
   final void Function(String)? onSubmit;
 
   const PersonalBiodataField({
     super.key,
     this.controller,
+    this.error,
+    this.errorText,
     this.onChange,
     this.onSubmit,
   });
@@ -21,6 +25,8 @@ class PersonalBiodataField extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: InputField(
         controller: controller!,
+        error: error!,
+        errorText: errorText!,
         capitalization: TextCapitalization.sentences,
         inputAction: TextInputAction.done,
         maxLength: 300,
