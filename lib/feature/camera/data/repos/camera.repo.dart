@@ -1,6 +1,4 @@
-import 'package:camera/src/camera_controller.dart';
-import 'package:camera_platform_interface/src/types/camera_exception.dart';
-import 'package:cross_file/src/types/interface.dart';
+import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
 import 'package:test_pt_seru/feature/camera/data/services/camera.service.dart';
 import 'package:test_pt_seru/feature/camera/domain/interfaces/camera.interface.dart';

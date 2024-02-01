@@ -3,24 +3,17 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/painting.dart';
 
 class CameraService {
-  CameraService._({
-    Future<List<CameraDescription>>? cam,
-  }) : _cam = cam ?? availableCamera();
+  CameraService._();
 
   static final _singleton = CameraService._();
 
   factory CameraService() => _singleton;
 
-  static Future<List<CameraDescription>> availableCamera() async {
-    return await availableCameras();
-  }
-
-  final Future<List<CameraDescription>> _cam;
   late CameraDescription _description;
   late CameraController _controller;
 
   Future<CameraController> initialized(int index) async {
-    var camera = await _cam;
+    var camera = await availableCameras();
     _description = camera[index];
     return _controller = CameraController(_description, ResolutionPreset.high);
   }
