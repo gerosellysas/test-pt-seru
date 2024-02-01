@@ -12,7 +12,7 @@ class CameraHelper extends GetxService {
       CameraDeletePictureUseCase();
   final CameraDisposeUseCase _cameraDispose = CameraDisposeUseCase();
 
-  late CameraController cameraController;
+  late CameraController controller;
 
   @override
   void onClose() {
@@ -21,7 +21,7 @@ class CameraHelper extends GetxService {
   }
 
   Future<void> initCamera(int index) async {
-    cameraController = await _cameraInitialize.execute(index);
+    controller = await _cameraInitialize.execute(index);
   }
 
   Future<XFile?> takePicture() async {

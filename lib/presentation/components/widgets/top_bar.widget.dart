@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:test_pt_seru/infrastructure/sources/constants/constants.dart';
+import 'package:test_pt_seru/presentation/components/widgets/rounded_icon_button.widget.dart';
 
 class TopBar extends StatelessWidget {
   final String? title;
@@ -26,8 +26,8 @@ class TopBar extends StatelessWidget {
         child: enableBack == true
             ? Row(
                 children: [
-                  _BackButton(
-                    key: key,
+                  RoundedIconButton(
+                    icon: Images.back,
                     onTap: onBackTap,
                   ),
                   Text(
@@ -48,53 +48,6 @@ class TopBar extends StatelessWidget {
                 ),
               ),
       ),
-    );
-  }
-}
-
-class _BackButton extends StatelessWidget {
-  final void Function()? onTap;
-
-  const _BackButton({
-    super.key,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Material(
-          shape: const CircleBorder(),
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24.w),
-            highlightColor: Hues.grey.withOpacity(0.24),
-            splashColor: Hues.grey.withOpacity(0.24),
-            onTap: onTap,
-            child: Container(
-              height: 48.w,
-              width: 48.w,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-              ),
-            ),
-          ),
-        ),
-        IgnorePointer(
-          ignoring: true,
-          child: Container(
-            height: 24.w,
-            width: 24.w,
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              Images.back,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

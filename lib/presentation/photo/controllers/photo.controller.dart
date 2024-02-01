@@ -1,10 +1,8 @@
-import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:test_pt_seru/infrastructure/sources/constants/constants.dart';
 import 'package:test_pt_seru/presentation/components/services/services.components.dart';
+import 'package:test_pt_seru/presentation/screens.dart';
 
 class PhotoController extends GetxController {
   final CameraHelper cam = Get.find<CameraHelper>();
@@ -31,11 +29,14 @@ class PhotoController extends GetxController {
     Get.back();
   }
 
-  Future<void> requestCameraPermission() async {
+  Future<void> requestCameraPermission(int index) async {
     await Permission.camera.onDeniedCallback(() {}).onGrantedCallback(() async {
-      await cam.initCamera(0);
-      cam.cameraController.initialize().then((_) async {
-        // TODO: GO TO CAMERA UI
+      await cam.initCamera(index);
+      cam.controller.initialize().then((_) async {
+        cam.controller.lockCaptureOrientation(DeviceOrientation.portraitUp);
+        await Get.to(() => CameraScreen(
+              controller: cam.controller,
+            ));
       });
     }).onPermanentlyDeniedCallback(() async {
       await openAppSettings();

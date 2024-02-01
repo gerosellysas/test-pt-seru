@@ -24,15 +24,15 @@ class PhotoScreen extends GetView<PhotoController> {
             children: [
               PhotoCard(
                 title: "ID card",
-                onTap: () => c.requestCameraPermission(),
+                onTap: () => c.requestCameraPermission(0),
               ),
               PhotoCard(
                 title: "Selfie photo",
-                onTap: () => c.requestCameraPermission(),
+                onTap: () => c.requestCameraPermission(1),
               ),
               PhotoCard(
                 title: "Freestyle photo",
-                onTap: () => c.requestCameraPermission(),
+                onTap: () => c.requestCameraPermission(0),
               ),
               const Expanded(child: SizedBox()),
               PhotoNavigation(
