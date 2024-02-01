@@ -5,12 +5,12 @@ import 'package:test_pt_seru/presentation/components/widgets/widgets.components.
 
 class PhotoNavigation extends StatelessWidget {
   final void Function()? onBackTap;
-  final void Function()? onNextTap;
+  final void Function()? onSaveTap;
 
   const PhotoNavigation({
     super.key,
     this.onBackTap,
-    this.onNextTap,
+    this.onSaveTap,
   });
 
   @override
@@ -31,7 +31,7 @@ class PhotoNavigation extends StatelessWidget {
               PrimaryButton(
                 w: 164.w,
                 text: "Save",
-                onTap: onNextTap,
+                onTap: onSaveTap,
               )
             ],
           ),

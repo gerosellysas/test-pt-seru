@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -34,13 +37,35 @@ class PhotoController extends GetxController {
     Get.back();
   }
 
-  Future<void> onPhotoCardTapped({
+  Future<void> onCaptureTapped({
     required int camMode,
     required int fileIndex,
   }) async {
-    if (app.cameraFiles[fileIndex].value.path == "") {
-      return await _requestCameraPermission(camMode, fileIndex);
-    }
+    await Permission.camera.onDeniedCallback(() {}).onGrantedCallback(() async {
+      await cam.initCamera(camMode);
+      cam.controller.initialize().then((_) async {
+        cam.controller.lockCaptureOrientation(DeviceOrientation.portraitUp);
+        await Get.to(() => CameraScreen(
+              controller: cam.controller,
+              onShutter: () => _onShuttered(fileIndex),
+            ));
+      });
+    }).onPermanentlyDeniedCallback(() async {
+      await openAppSettings();
+    }).request();
+  }
+
+  Future<void> _onShuttered(int i) async {
+    app.cameraFiles[i].value = await cam.takePicture() ?? XFile("");
+    await Get.to(
+      () => PreviewScreen(
+        file: app.cameraFiles[i].value,
+        enableZoom: false,
+      ),
+    );
+  }
+
+  Future<void> onPreviewTapped(int fileIndex) async {
     _scale.value = 1;
     await Get.to(
       () => Obx(() => PreviewScreen(
@@ -68,28 +93,15 @@ class PhotoController extends GetxController {
     );
   }
 
-  Future<void> _requestCameraPermission(int camMode, int fileIndex) async {
-    await Permission.camera.onDeniedCallback(() {}).onGrantedCallback(() async {
-      await cam.initCamera(camMode);
-      cam.controller.initialize().then((_) async {
-        cam.controller.lockCaptureOrientation(DeviceOrientation.portraitUp);
-        await Get.to(() => CameraScreen(
-              controller: cam.controller,
-              onShutter: () => _onShuttered(fileIndex),
-            ));
-      });
-    }).onPermanentlyDeniedCallback(() async {
-      await openAppSettings();
-    }).request();
-  }
-
-  Future<void> _onShuttered(int i) async {
-    app.cameraFiles[i].value = await cam.takePicture() ?? XFile("");
-    await Get.to(
-      () => PreviewScreen(
-        file: app.cameraFiles[i].value,
-        enableZoom: false,
-      ),
-    );
+  void onSaveTapped() async {
+    var empty = app.cameraFiles.any((file) => file.value.path == "");
+    if (empty) return;
+    for (var i = 0; i < app.cameraFiles.length; i++) {
+      File file = File(app.cameraFiles[i].value.path);
+      List<int> imageBytes = file.readAsBytesSync();
+      String base64Image = base64Encode(imageBytes);
+      app.cameraBase64[i].value = base64Image;
+    }
+    await Get.offAllNamed("/result");
   }
 }
