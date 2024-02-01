@@ -39,7 +39,7 @@ class Nav {
       page: () => const WelcomeScreen(),
       binding: SplashControllerBinding(),
       transition: Transition.downToUp,
-      transitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 450),
       curve: Curves.linear,
     ),
     GetPage(
@@ -47,7 +47,7 @@ class Nav {
       page: () => const PersonalScreen(),
       binding: PersonalControllerBinding(),
       transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 450),
       curve: Curves.linear,
     ),
     GetPage(
@@ -55,7 +55,15 @@ class Nav {
       page: () => const LocationScreen(),
       binding: LocationControllerBinding(),
       transition: Transition.rightToLeft,
-      transitionDuration: const Duration(milliseconds: 600),
+      transitionDuration: const Duration(milliseconds: 450),
+      curve: Curves.linear,
+    ),
+    GetPage(
+      name: Routes.photo,
+      page: () => const PhotoScreen(),
+      binding: PhotoControllerBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 450),
       curve: Curves.linear,
     ),
   ];

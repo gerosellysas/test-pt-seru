@@ -4,7 +4,8 @@ class Routes {
   }
 
   static const location = '/location';
-  static const splash = '/';
   static const personal = '/personal';
+  static const splash = '/';
   static const welcome = '/welcome';
+  static const photo = '/photo';
 }
