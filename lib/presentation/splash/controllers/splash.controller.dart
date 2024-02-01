@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
+import 'package:test_pt_seru/presentation/components/services/services.components.dart';
 
 class SplashController extends GetxController {
+  final AppService app = Get.find();
+
   @override
   void onReady() {
     _initializedSplash();

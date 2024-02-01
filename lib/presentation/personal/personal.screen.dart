@@ -23,18 +23,18 @@ class PersonalScreen extends GetView<PersonalController> {
             children: [
               PersonalNameField(
                 controllers: [c.fieldControllers[0], c.fieldControllers[1]],
-                onChange: (i, str) {},
+                onChange: (i, str) => c.onFieldChanged(i, str),
                 onSubmit: (i, str) => c.onFieldSubmitted(i, str),
               ),
               PersonalBiodataField(
                 controller: c.fieldControllers[2],
-                onChange: (str) => (),
+                onChange: (str) => c.onFieldChanged(2, str),
                 onSubmit: (str) => c.onFieldSubmitted(2, str),
               ),
               const Expanded(child: SizedBox()),
               Obx(() => PersonalNavigation(
-                    bottomHeight: c.bottomHeight.value,
-                    onTap: () => (),
+                    bottomHeight: c.app.bottomHeight.value,
+                    onTap: () => c.onButtonTapped(),
                   )),
             ],
           ),
