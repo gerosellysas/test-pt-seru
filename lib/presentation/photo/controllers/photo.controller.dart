@@ -66,6 +66,7 @@ class PhotoController extends GetxController {
   }
 
   Future<void> onPreviewTapped(int fileIndex) async {
+    if (app.cameraFiles[fileIndex].value.path == "") return;
     _scale.value = 1;
     await Get.to(
       () => Obx(() => PreviewScreen(

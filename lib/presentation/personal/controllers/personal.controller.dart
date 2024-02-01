@@ -48,15 +48,12 @@ class PersonalController extends GetxController with WidgetsBindingObserver {
     onButtonTapped();
   }
 
-  void onButtonTapped() {
+  void onButtonTapped() async {
     FocusManager.instance.primaryFocus!.unfocus();
     validateFieldInput();
     var empty = fieldErrors.any((error) => error.value == true);
     if (empty) return;
-    Future.delayed(
-      const Duration(milliseconds: 175),
-      () async => await Get.toNamed("/location"),
-    );
+    await Get.toNamed("/location");
   }
 
   void validateFieldInput() {
