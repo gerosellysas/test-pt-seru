@@ -37,6 +37,7 @@ class DropdownField extends StatelessWidget {
     return DropdownSearch<String>(
       asyncItems: items,
       dropdownDecoratorProps: DropDownDecoratorProps(
+        baseStyle: Fonts.normal().copyWith(overflow: TextOverflow.ellipsis),
         dropdownSearchDecoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
@@ -104,12 +105,24 @@ class DropdownField extends StatelessWidget {
       ),
       popupProps: PopupProps.menu(
         showSearchBox: true,
+        showSelectedItems: true,
         constraints: BoxConstraints(maxHeight: 240.h),
         menuProps: MenuProps(
           backgroundColor: Colors.transparent,
           borderRadius: BorderRadius.circular(4.w),
           elevation: 0,
         ),
+        itemBuilder: (context, str, selected) {
+          return Material(
+            color: selected ? Hues.grey.withOpacity(0.36) : Hues.white,
+            child: ListTile(
+              title: Text(
+                str,
+                style: Fonts.normal().copyWith(overflow: TextOverflow.ellipsis),
+              ),
+            ),
+          );
+        },
         searchFieldProps: TextFieldProps(
           cursorWidth: 1.75,
           enableInteractiveSelection: false,

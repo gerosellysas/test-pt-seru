@@ -11,12 +11,7 @@ class LocationController extends GetxController with WidgetsBindingObserver {
   var districtData = <List<String>>[];
   var subDistrictData = <List<String>>[];
 
-  var errors = [
-    false.obs,
-    false.obs,
-    false.obs,
-    false.obs,
-  ];
+  var errors = [false.obs, false.obs, false.obs, false.obs];
 
   @override
   void onInit() {
@@ -141,32 +136,27 @@ class LocationController extends GetxController with WidgetsBindingObserver {
   }
 
   void onDropdownChanged(int i, String str) {
-    switch (i) {
-      case 0:
-        if (app.region[i].value != str) {
+    if (app.region[i].value != str) {
+      switch (i) {
+        case 0:
           app.region = ["".obs, "".obs, "".obs, "".obs];
-        }
-        break;
-      case 1:
-        if (app.region[i].value != str) {
+          break;
+        case 1:
           app.region = [app.region[0], "".obs, "".obs, "".obs];
-        }
-        break;
-      case 2:
-        if (app.region[i].value != str) {
+          break;
+        case 2:
           app.region = [app.region[0], app.region[1], "".obs, "".obs];
-        }
-        break;
-      case 3:
-        if (app.region[i].value != str) {
+          break;
+        case 3:
           app.region = [app.region[0], app.region[1], app.region[2], "".obs];
-        }
-        break;
-      default:
+          break;
+        default:
+      }
+      errors = [false.obs, false.obs, false.obs, false.obs];
     }
-    update();
     app.region[i].value = str;
     if (app.region[i].value != "") errors[i].value = false;
+    update();
   }
 
   void onDropdownCleared(int i) {
@@ -176,7 +166,6 @@ class LocationController extends GetxController with WidgetsBindingObserver {
         break;
       case 1:
         app.region = [app.region[0], "".obs, "".obs, "".obs];
-
         break;
       case 2:
         app.region = [app.region[0], app.region[1], "".obs, "".obs];
@@ -186,6 +175,7 @@ class LocationController extends GetxController with WidgetsBindingObserver {
         app.region = [app.region[0], app.region[1], app.region[2], "".obs];
       default:
     }
+    errors = [false.obs, false.obs, false.obs, false.obs];
     update();
   }
 
