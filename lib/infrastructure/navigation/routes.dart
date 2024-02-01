@@ -1,9 +1,10 @@
 class Routes {
   static Future<String> get initialRoute async {
-    return splash;
+    return location;
   }
 
+  static const form = '/form';
   static const splash = '/';
   static const welcome = '/welcome';
-  static const form = '/form';
+  static const location = '/location';
 }

@@ -18,6 +18,9 @@ class PrimaryButton extends StatelessWidget {
 
   double get _width => w ?? 304.w;
 
+  Color get _splash =>
+      color == null ? Hues.blue.withOpacity(0.48) : Hues.red.withOpacity(0.48);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -28,8 +31,8 @@ class PrimaryButton extends StatelessWidget {
           color: color ?? Hues.primary,
           child: InkWell(
             borderRadius: BorderRadius.circular(12.w),
-            highlightColor: Hues.blue.withOpacity(0.48),
-            splashColor: Hues.blue.withOpacity(0.48),
+            highlightColor: _splash,
+            splashColor: _splash,
             onTap: onTap,
             child: Container(
               height: 40.h,
