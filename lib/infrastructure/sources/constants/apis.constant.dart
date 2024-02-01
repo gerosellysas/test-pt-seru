@@ -7,6 +7,6 @@ class APIs {
       "$_baseRegional/regencies/$provinceId.json";
   String regionalDistricts(String regencyId) =>
       "$_baseRegional/districts/$regencyId.json";
-  String regionalVillages(String districtId) =>
+  String regionalSubDistricts(String districtId) =>
       "$_baseRegional/villages/$districtId.json";
 }

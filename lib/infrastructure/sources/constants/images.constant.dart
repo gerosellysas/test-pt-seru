@@ -4,4 +4,5 @@ class Images {
 
   static String logo = _pngPath("logo");
   static String back = _svgPath("back");
+  static String clear = _svgPath("clear");
 }

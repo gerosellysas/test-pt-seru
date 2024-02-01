@@ -4,14 +4,18 @@ import 'package:test_pt_seru/presentation/components/widgets/widgets.components.
 
 class LocationField extends StatelessWidget {
   final Future<List<String>> Function(int, String)? items;
-  final void Function(int)? onTap;
+  final List<String>? selectedItems;
+  final List<bool>? errors;
   final void Function(int, String)? onChange;
+  final void Function(int)? onClear;
 
   const LocationField({
     super.key,
     this.items,
-    this.onTap,
+    this.selectedItems,
+    this.errors,
     this.onChange,
+    this.onClear,
   });
 
   List<String> get _labels => [
@@ -25,9 +29,11 @@ class LocationField extends StatelessWidget {
         _labels.length,
         (i) => DropdownField(
           items: items != null ? (item) => items!(i, item) : null,
+          selectedItem: selectedItems![i],
           labelText: _labels[i],
-          onTap: () => onTap!(i),
+          error: errors![i],
           onChange: (str) => onChange!(i, str!),
+          onClear: () => onClear!(i),
         ),
       );
 

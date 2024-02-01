@@ -8,6 +8,7 @@ import 'package:test_pt_seru/feature/connection/connection.dart';
 class AppService extends GetxService with WidgetsBindingObserver {
   final NetworkCheckAvailabilityUseCase _networkCheckAvailability =
       NetworkCheckAvailabilityUseCase();
+  final HttpClientGetUseCase _httpClientGet = HttpClientGetUseCase();
 
   final _view = WidgetsBinding.instance.platformDispatcher.views.first;
 
@@ -57,5 +58,18 @@ class AppService extends GetxService with WidgetsBindingObserver {
     if (streamConnectivityResult == null) return;
     streamConnectivityResult?.cancel();
     streamConnectivityResult = null;
+  }
+
+  Future<List<List<String>>> fetchData(String url) async {
+    var dataResults = <dynamic>[];
+    var data = <List<String>>[[], []];
+    var res = await _httpClientGet.execute(url);
+    res.fold((l) => null, (r) => dataResults = r as List<dynamic>);
+    if (res.isLeft()) return [];
+    for (var dResult in dataResults) {
+      data[0].add(dResult["id"] as String);
+      data[1].add(dResult["name"] as String);
+    }
+    return data;
   }
 }

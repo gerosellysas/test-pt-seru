@@ -8,21 +8,29 @@ import 'package:test_pt_seru/infrastructure/sources/constants/constants.dart';
 
 class DropdownField extends StatelessWidget {
   final Future<List<String>> Function(String)? items;
+  final String? selectedItem;
   final String? labelText;
   final bool? error;
-  final FocusNode? searchFoscus;
-  final void Function()? onTap;
   final void Function(String?)? onChange;
+  final void Function()? onClear;
 
   const DropdownField({
     super.key,
     this.items,
+    this.selectedItem,
     this.labelText,
     this.error,
-    this.searchFoscus,
-    this.onTap,
     this.onChange,
+    this.onClear,
   });
+
+  String get _labelBefore => labelText == "City/Regency"
+      ? "province"
+      : labelText == "District"
+          ? "city/regency"
+          : labelText == "Sub-district"
+              ? "district"
+              : "";
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +45,7 @@ class DropdownField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: error == true ? Hues.red : Hues.blue,
+              color: error == true ? Hues.red : Hues.primary,
               width: 1.5,
             ),
           ),
@@ -45,10 +53,34 @@ class DropdownField extends StatelessWidget {
           isDense: true,
           labelText: labelText,
           labelStyle: Fonts.italic(color: Hues.grey),
-          hintText: "Please select your ${labelText!.toLowerCase()}",
+          hintText: selectedItem == "" ? "-" : selectedItem,
           hintStyle: Fonts.italic(color: Hues.grey),
-          floatingLabelStyle: Fonts.italic(color: Hues.blue),
+          floatingLabelStyle: Fonts.italic(
+            color: error == true ? Hues.red : Hues.blue,
+          ),
         ),
+      ),
+      clearButtonProps: ClearButtonProps(
+        isVisible: true,
+        icon: Container(
+          height: 16.w,
+          width: 16.w,
+          alignment: Alignment.center,
+          child: Transform.rotate(
+            angle: -(math.pi / 2),
+            child: SvgPicture.asset(
+              Images.clear,
+              fit: BoxFit.fill,
+              colorFilter: ColorFilter.mode(
+                Hues.red.withOpacity(0.72),
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+        ),
+        highlightColor: Hues.grey.withOpacity(0.24),
+        splashColor: Hues.grey.withOpacity(0.24),
+        onPressed: onClear,
       ),
       dropdownButtonProps: DropdownButtonProps(
         icon: Container(
@@ -61,7 +93,7 @@ class DropdownField extends StatelessWidget {
               Images.back,
               fit: BoxFit.fill,
               colorFilter: const ColorFilter.mode(
-                Hues.primary,
+                Hues.blue,
                 BlendMode.srcIn,
               ),
             ),
@@ -79,7 +111,6 @@ class DropdownField extends StatelessWidget {
           elevation: 0,
         ),
         searchFieldProps: TextFieldProps(
-          focusNode: searchFoscus,
           cursorWidth: 1.75,
           enableInteractiveSelection: false,
           textInputAction: TextInputAction.search,
@@ -92,7 +123,7 @@ class DropdownField extends StatelessWidget {
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
-                color: Hues.blue,
+                color: Hues.primary,
                 width: 1.5,
               ),
             ),
@@ -114,7 +145,7 @@ class DropdownField extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 4.0,
-                        color: Hues.black.withOpacity(0.32),
+                        color: Hues.black.withOpacity(0.36),
                       ),
                     ],
                   ),
@@ -124,16 +155,40 @@ class DropdownField extends StatelessWidget {
             ],
           );
         },
+        errorBuilder: (context, str, _) {
+          return Column(
+            children: [
+              SizedBox(height: 4.h),
+              Center(
+                child: Text(
+                  "You haven't choose any $_labelBefore",
+                  style: Fonts.italic(
+                    size: 12.sp,
+                    color: Hues.black.withOpacity(0.36),
+                  ),
+                ),
+              ),
+              const Expanded(child: SizedBox()),
+            ],
+          );
+        },
         emptyBuilder: (context, result) {
           return Column(
             children: [
+              SizedBox(height: 4.h),
               Center(
-                child: Text(
-                  result.isNotEmpty
-                      ? "No result found for \"$result\""
-                      : "No data",
-                  style: Fonts.italic(size: 12.sp, color: Hues.red),
-                ),
+                child: selectedItem == ""
+                    ? Text(
+                        "You haven't choose any $_labelBefore",
+                        style: Fonts.italic(
+                          size: 12.sp,
+                          color: Hues.black.withOpacity(0.36),
+                        ),
+                      )
+                    : Text(
+                        "No result found for \"$result\"",
+                        style: Fonts.italic(size: 12.sp, color: Hues.red),
+                      ),
               ),
               const Expanded(child: SizedBox()),
             ],
@@ -149,6 +204,7 @@ class DropdownField extends StatelessWidget {
           );
         },
       ),
+      selectedItem: selectedItem != "" ? selectedItem : null,
       onChanged: onChange,
     );
   }
