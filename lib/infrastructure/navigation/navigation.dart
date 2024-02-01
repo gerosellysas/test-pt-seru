@@ -43,9 +43,9 @@ class Nav {
       curve: Curves.linear,
     ),
     GetPage(
-      name: Routes.form,
-      page: () => const FormScreen(),
-      binding: FormControllerBinding(),
+      name: Routes.personal,
+      page: () => const PersonalScreen(),
+      binding: PersonalControllerBinding(),
       transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 600),
       curve: Curves.linear,

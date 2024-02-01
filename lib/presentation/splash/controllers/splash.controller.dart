@@ -15,6 +15,6 @@ class SplashController extends GetxController {
   }
 
   void onWelcomeButtonTapped() async {
-    await Get.offAllNamed("/form");
+    await Get.offAllNamed("/personal");
   }
 }
